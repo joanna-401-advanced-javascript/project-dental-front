@@ -1,18 +1,15 @@
-# LAB - TEMPLATE
+# LAB - 
 
-## Project Name
+## Project Dental
 
 ### Author: Joanna Arroyo
 
 ### Links and Resources
 * [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
+* [travis](https://travis-ci.com/joanna-401-advanced-javascript/project-dental-front)
 * [front-end](http://xyz.com) (when applicable)
 
 #### Documentation
-* [api docs](http://xyz.com) (API servers)
-* [jsdoc](http://xyz.com) (Server assignments)
 * [styleguide](http://xyz.com) (React assignments)
 
 ### Modules
@@ -26,10 +23,6 @@ Usage Notes or examples
 Usage Notes or examples
 
 ### Setup
-#### `.env` requirements
-* `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
-
 #### Running the app
 * `npm start`
 * Endpoint: `/foo/bar/`
@@ -40,9 +33,6 @@ Usage Notes or examples
 #### Tests
 * Unit tests: `npm run test`
 * Lint tests: `npm run lint`
-* How do you run tests?
-* What assertions were made?
-* What assertions need to be / should be made?
 
 #### UML
 Link to an image of the UML for your application and response to events
