@@ -27,7 +27,7 @@ class App extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.createNewMaterial(this.state.name);
-    this.setState({name: ''});
+    this.setState({ name: '' });
   };
 
   render() {

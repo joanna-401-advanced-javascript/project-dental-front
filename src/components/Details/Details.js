@@ -28,7 +28,7 @@ class Detail extends React.Component {
       this.state.method,
       this.state.value,
     );
-    this.setState({reference: '', method: '', value: ''});
+    this.setState({ reference: '', method: '', value: '' });
   };
 
   render() {
