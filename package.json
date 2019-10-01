@@ -1,5 +1,5 @@
 {
-  "name": "starter-code-27",
+  "name": "project-dental-front",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -9,6 +9,7 @@
     "enzyme-adapter-react-16": "1.14.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-jest": "^22.17.0",
+    "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-jsonschema-form": "1.8.0",
@@ -17,6 +18,7 @@
     "react-scripts": "3.1.1",
     "react-test-renderer": "16.9.0",
     "redux": " 4.0.4",
+    "redux-devtools-extension": "^2.13.8",
     "sass": "^1.22.12",
     "superagent": "5.1.0"
   },
@@ -30,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint '**/*.js' --fix",
+    "lint": "eslint '**/*.jsx' '**/*.js' --fix",
     "docs": "styleguidist server",
     "docs:build": "styleguidist build"
   },
