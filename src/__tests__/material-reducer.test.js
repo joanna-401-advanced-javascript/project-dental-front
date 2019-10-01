@@ -8,8 +8,8 @@ describe('Material reducer', () => {
   test('should create new material', () => {
     const createAction = {
       type: 'MATERIAL_CREATE',
-      payload: {name: 'test'},
+      payload: { name: 'test' },
     };
-    expect(materialReducer([], createAction)).toEqual([{name: 'test'}]);
+    expect(materialReducer([], createAction)).toEqual([{ name: 'test' }]);
   });
 });

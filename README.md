@@ -1,38 +1,37 @@
-# LAB - 
+# LAB - 36
 
-## Project Dental
+## Project Dental - Front-end
 
 ### Author: Joanna Arroyo
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
+* [submission PR](https://github.com/joanna-401-advanced-javascript/project-dental-front/pull/1)
 * [travis](https://travis-ci.com/joanna-401-advanced-javascript/project-dental-front)
-* [front-end](http://xyz.com) (when applicable)
+* [front-end]() - To be deployed
 
 #### Documentation
-* [styleguide](http://xyz.com) (React assignments)
+* [styleguide](http://192.168.2.67:6060/)
 
 ### Modules
-#### `modulename.js`
+#### `index.js` `app.js` `Header.jsx` `Details.jsx` `main-reducer.js` `material-reducer.js` `detail-reducer.js` `detail-actions.js` `material-actions.js` `setupTests.js`
 ##### Exported Values and Methods
 
-###### `foo(thing) -> string`
-Usage Notes or examples
-
-###### `bar(array) -> array`
-Usage Notes or examples
+###### `app.js -> React Class component`
+###### `Header.js -> React functional component`
+###### `Details.js -> React Class component`
+###### `main-reducer.js -> React functional component`
+###### `material-reducer.js -> React functional component`
+###### `detail-reducer.js -> React functional component`
+###### `detail-actions.js -> React functional components`
+###### `material-actions.js -> React functional components`
 
 ### Setup
 #### Running the app
 * `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
   
 #### Tests
 * Unit tests: `npm run test`
 * Lint tests: `npm run lint`
 
 #### UML
-Link to an image of the UML for your application and response to events
+![UML](./assets/uml.jpg)
