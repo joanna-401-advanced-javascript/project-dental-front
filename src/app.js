@@ -53,8 +53,6 @@ class App extends React.Component {
               <Detail material={material}/>
             </div>)
         }
-
-
       </>
     );
   }
