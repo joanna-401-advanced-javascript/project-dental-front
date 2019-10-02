@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 // Components
 import Header from './components/Header/Header.jsx';
 import Login from './components/Auth/login';
+import Auth from './components/Auth/auth';
 import Detail from './components/Details/Details';
 
 // Actions
@@ -39,17 +40,18 @@ class App extends React.Component {
 
         <Login />
         <hr />
-
-        <form onSubmit={this.handleSubmit}>
-          <input
-            name='material'
-            type='text'
-            value={this.state.name}
-            onChange={this.handleChange}
-            placeholder='Material name...'
-          />
-          <button type='submit'>Add New Material </button>
-        </form>
+        <Auth capability='read'>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              name='material'
+              type='text'
+              value={this.state.name}
+              onChange={this.handleChange}
+              placeholder='Material name...'
+            />
+            <button type='submit'>Add New Material </button>
+          </form>
+        </Auth>
         <hr />
 
         <h3>Materials</h3>
