@@ -1,4 +1,4 @@
-import materialReducer from '../reducers/material-reducer';
+import materialReducer from '../store/reducers/material-reducer';
 
 describe('Material reducer', () => {
   test('should return initial state', () => {

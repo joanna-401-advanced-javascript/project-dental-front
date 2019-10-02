@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
 import PropTypes from 'prop-types';
 
-import { changeStateAction, logoutAction } from '../../actions/user-actions';
+import { changeStateAction, logoutAction } from '../../store/actions/user-actions';
 
 const API = process.env.REACT_APP_API;
 
