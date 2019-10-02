@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import Header from './components/Header/Header.jsx';
+import Login from './components/Auth/login';
 import Detail from './components/Details/Details';
 
 // Actions
@@ -34,6 +35,10 @@ class App extends React.Component {
     return (
       <>
         <Header />
+        <hr/>
+
+        <Login />
+        <hr />
 
         <form onSubmit={this.handleSubmit}>
           <input
