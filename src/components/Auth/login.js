@@ -1,18 +1,21 @@
+/* eslint-disable no-console */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
+import PropTypes from 'prop-types';
 
-import { changeStateAction, logoutAction } from "../../actions/user-actions";
+import { changeStateAction, logoutAction } from '../../actions/user-actions';
 
 const API = process.env.REACT_APP_API;
 
-const If = props => {
-  return !!props.condition ? props.children : null;
+const If = (props) => {
+  return props.condition ? props.children : null;
 };
 
 class Login extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       username: '',
@@ -20,14 +23,14 @@ class Login extends React.Component {
     };
   }
 
-  handleChange = event => {
-    this.setState({[event.target.name]: event.target.value});
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = (event, type) => {
     event.preventDefault();
     this.login(this.state.username, this.state.password, type);
-    this.setState({username: '', password: ''});
+    this.setState({ username: '', password: '' });
   };
 
   login = (username, password, type) => {
@@ -40,7 +43,7 @@ class Login extends React.Component {
       }),
     };
 
-    if (type === 'signup'){
+    if (type === 'signup') {
       options.body = JSON.stringify({ username, password });
       options.headers = new Headers({
         'Content-Type': 'application/json',
@@ -48,16 +51,16 @@ class Login extends React.Component {
     }
 
     fetch(`${API}/${type}`, options)
-      .then(response => response.text())
-      .then(token => this.validateToken(token))
-      .catch(console.error)
+      .then((response) => response.text())
+      .then((token) => this.validateToken(token))
+      .catch(console.error);
   };
 
   validateToken = (token) => {
     try {
       const user = jwt.verify(token, process.env.REACT_APP_SECRET);
       this.props.setUserState(true, token, user);
-    } catch(error) {
+    } catch (error) {
       this.props.setUserState(false, null, {});
     }
   };
@@ -71,8 +74,8 @@ class Login extends React.Component {
     this.validateToken(cookieToken);
   };
 
-  render(){
-    return(
+  render() {
+    return (
       <>
         <If condition={this.props.users.loggedIn}>
           <button onClick={this.logout}>Log Out</button>
@@ -97,17 +100,17 @@ class Login extends React.Component {
           </form>
         </If>
       </>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     users: state.users,
-  }
+  };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     setUserState: (loggedIn, token, user) => {
       cookie.save('auth', token);
@@ -117,6 +120,11 @@ const mapDispatchToProps = dispatch => {
       dispatch(logoutAction());
     },
   };
+};
+
+Login.propTypes = {
+  setUserState: PropTypes.func,
+  users: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

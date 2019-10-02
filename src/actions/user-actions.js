@@ -1,9 +1,9 @@
 export const changeStateAction = (loggedIn, token, user) => ({
   type: 'USER_STATE_CHANGE',
   payload: {
-    loggedIn: loggedIn,
-    token: token,
-    user: user,
+    loggedIn,
+    token,
+    user,
   },
 });
 
@@ -13,5 +13,5 @@ export const logoutAction = () => ({
     loggedIn: false,
     token: null,
     user: {},
-  }
+  },
 });

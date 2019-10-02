@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 const initialState = {
   loggedIn: false,
   token: null,
@@ -5,11 +7,13 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case 'USER_STATE_CHANGE':
-      return state = payload;
+      state = payload;
+      return state;
     case 'LOGOUT':
-      return state = initialState;
+      state = initialState;
+      return state;
     default:
       return state;
   }
