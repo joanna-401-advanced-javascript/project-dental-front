@@ -4,6 +4,13 @@ export default (state = [], action) => {
       return action.payload;
     case 'MATERIAL_ADD':
       return [...state, action.payload];
+    case 'MATERIAL_UPDATE':
+      return state.map((material) => {
+        if (material._id === action.payload._id) {
+          material.name = action.payload.name;
+        }
+        return material;
+      });
     default:
       return state;
   }

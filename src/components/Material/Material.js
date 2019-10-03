@@ -26,9 +26,21 @@ class Material extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addMaterial({name: this.state.name});
+    this.props.addMaterial({ name: this.state.name });
     this.setState({ name: '' });
   };
+
+  handleUpdate = (event, id) => {
+    event.preventDefault();
+    this.props.updateMaterial({ name: this.state.name, id });
+    this.setState({ name: '' });
+  };
+
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if(prevProps.materials !== this.props.materials){
+  //     this.props.fetchMaterials();
+  //   }
+  // }
 
   render() {
     return (
@@ -47,12 +59,12 @@ class Material extends React.Component {
 
         <h3>Materials</h3>
         {this.props.materials.map((material, i) => <div key={i}>
-          <p>Name: {material.name}</p>
-          <p>ID: {material._id}</p>
-          {/* <Detail material={material}/> */}
-          <button>Update</button>
-          <button>Delete</button>
-        </div>)
+            <p>Name: {material.name}</p>
+            <p>ID: {material._id}</p>
+            {/* <Detail material={material}/> */}
+            <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
+            <button>Delete</button>
+          </div>)
         }
       </>
     );
@@ -69,13 +81,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addMaterial: (name) => dispatch(materialActions.addMaterialAction(name)),
     fetchMaterials: () => dispatch(materialActions.fetchMaterialsAction()),
+    updateMaterial: (data) => dispatch(materialActions.updateMaterialAction(data)),
   };
 };
 
 Material.propTypes = {
+  materials: PropTypes.array,
   addMaterial: PropTypes.func,
   fetchMaterials: PropTypes.func,
-  materials: PropTypes.array,
+  updateMaterial: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Material);

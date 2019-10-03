@@ -2,6 +2,13 @@ import cookie from 'react-cookies';
 
 const API = process.env.REACT_APP_API;
 
+const get = (payload) => {
+  return {
+    type: 'MATERIAL_FETCH',
+    payload,
+  };
+};
+
 const fetchMaterialsAction = () => (dispatch) => {
   const cookieToken = cookie.load('auth');
   const options = {
@@ -16,9 +23,9 @@ const fetchMaterialsAction = () => (dispatch) => {
     .then((data) => dispatch(get(data)));
 };
 
-const get = (payload) => {
+const post = (payload) => {
   return {
-    type: 'MATERIAL_FETCH',
+    type: 'MATERIAL_ADD',
     payload,
   };
 };
@@ -40,14 +47,33 @@ const addMaterialAction = (name) => (dispatch) => {
     .then((data) => dispatch(post(data)));
 };
 
-const post = (payload) => {
+const put = (payload) => {
   return {
-    type: 'MATERIAL_ADD',
+    type: 'MATERIAL_UPDATE',
     payload,
-  }
+  };
+};
+
+const updateMaterialAction = (data) => (dispatch) => {
+  const cookieToken = cookie.load('auth');
+  const updateData = { name: data.name };
+  const options = {
+    method: 'PUT',
+    body: JSON.stringify(updateData),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${cookieToken}`,
+    },
+  };
+
+  return fetch(`${API}/api/v1/material/${data.id}`, options)
+    .then((results) => results.json())
+    .then((dataFromApi) => dispatch(put(dataFromApi)));
 };
 
 export default {
   fetchMaterialsAction,
   addMaterialAction,
+  updateMaterialAction,
 };
