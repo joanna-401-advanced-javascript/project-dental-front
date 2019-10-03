@@ -24,8 +24,8 @@ describe('Material reducer', () => {
   test('should update a material', () => {
     const updateAction = {
       type: 'MATERIAL_UPDATE',
-      payload: { name: 'update' , _id: 1},
+      payload: { name: 'update', _id: 1 },
     };
-    expect(materialReducer([{ name: 'test' , _id: 1}], updateAction)).toEqual( [{ name: 'update' , _id: 1}] );
+    expect(materialReducer([{ name: 'test', _id: 1 }], updateAction)).toEqual([{ name: 'update', _id: 1 }]);
   });
 });
