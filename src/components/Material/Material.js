@@ -6,10 +6,7 @@ import PropTypes from 'prop-types';
 // import Detail from '../Detail/Detail';
 
 // Actions
-// import { createMaterialAction } from '../../store/actions/material-actions';
 import materialActions from '../../store/actions/material-actions';
-
-// const API = process.env.REACT_APP_API;
 
 class Material extends React.Component {
   constructor(props) {
@@ -29,7 +26,7 @@ class Material extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.createNewMaterial(this.state.name);
+    this.props.addMaterial({name: this.state.name});
     this.setState({ name: '' });
   };
 
@@ -50,8 +47,11 @@ class Material extends React.Component {
 
         <h3>Materials</h3>
         {this.props.materials.map((material, i) => <div key={i}>
-          {material.name}
+          <p>Name: {material.name}</p>
+          <p>ID: {material._id}</p>
           {/* <Detail material={material}/> */}
+          <button>Update</button>
+          <button>Delete</button>
         </div>)
         }
       </>
@@ -67,13 +67,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewMaterial: (name) => dispatch(materialActions.createMaterialAction(name)),
+    addMaterial: (name) => dispatch(materialActions.addMaterialAction(name)),
     fetchMaterials: () => dispatch(materialActions.fetchMaterialsAction()),
   };
 };
 
 Material.propTypes = {
-  createNewMaterial: PropTypes.func,
+  addMaterial: PropTypes.func,
   fetchMaterials: PropTypes.func,
   materials: PropTypes.array,
 };
