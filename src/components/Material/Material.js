@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 // import { createMaterialAction } from '../../store/actions/material-actions';
 import materialActions from '../../store/actions/material-actions';
 
-const API = process.env.REACT_APP_API;
+// const API = process.env.REACT_APP_API;
 
 class Material extends React.Component {
   constructor(props) {
@@ -67,14 +67,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewMaterial: (name) => {
-      dispatch(materialActions.createMaterialAction(name));
-    },
-    fetchMaterials: () => {
-      fetch(`${API}/api/v1/material`)
-        .then((results) => results.json())
-        .then((data) => dispatch(materialActions.get(data)));
-    },
+    createNewMaterial: (name) => dispatch(materialActions.createMaterialAction(name)),
+    fetchMaterials: () => dispatch(materialActions.fetchMaterialsAction()),
   };
 };
 

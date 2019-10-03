@@ -1,4 +1,6 @@
-// const API = process.env.REACT_APP_API;
+import cookie from 'react-cookies';
+
+const API = process.env.REACT_APP_API;
 
 const createMaterialAction = (name) => ({
   type: 'MATERIAL_CREATE',
@@ -16,14 +18,22 @@ const get = (payload) => {
   };
 };
 
-// const fetchMaterialsAction = () => (dispatch) => {
-//   return fetch(`${API}/api/v1/material`)
-//     .then((results => results.json()))
-//     .then((data) => dispatch(get(data)));
-// };
+const fetchMaterialsAction = () => (dispatch) => {
+  const cookieToken = cookie.load('auth');
+  const options = {
+    method: 'GET',
+    headers: new Headers({
+      Authorization: `Bearer ${cookieToken}`,
+    }),
+  };
+
+  return fetch(`${API}/api/v1/material`, options)
+    .then(((results) => results.json()))
+    .then((data) => dispatch(get(data)));
+};
 
 export default {
   get,
   createMaterialAction,
-  // fetchMaterialsAction,
+  fetchMaterialsAction,
 };
