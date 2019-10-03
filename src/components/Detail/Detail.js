@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Actions
-import { createDetailAction } from '../../actions/detail-actions';
+import { createDetailAction } from '../../store/actions/detail-actions';
 
 class Detail extends React.Component {
   constructor(props) {

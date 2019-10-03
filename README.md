@@ -1,11 +1,11 @@
-# LAB - 37
+# LAB - 38
 
 ## Project Dental - Front-end
 
 ### Author: Joanna Arroyo
 
 ### Links and Resources
-* [submission PR](https://github.com/joanna-401-advanced-javascript/project-dental-front/pull/2)
+* [submission PR](https://github.com/joanna-401-advanced-javascript/project-dental-front/pull/3)
 * [travis](https://travis-ci.com/joanna-401-advanced-javascript/project-dental-front)
 * [front-end](https://dental-materials.herokuapp.com/)
 
@@ -13,7 +13,7 @@
 * [styleguide](http://192.168.2.67:6060/)
 
 ### Modules
-#### `index.js` `app.js` `Header.jsx` `Details.jsx` `auth.js` `login.js`
+#### `index.js` `app.js` `Header.jsx` `Material.js` `Detail.js` `auth.js` `login.js`
 #### `main-reducer.js` `material-reducer.js` `detail-reducer.js` `user-reducer.js`
 #### `detail-actions.js` `material-actions.js` `user-actions.js` `setupTests.js`
 
