@@ -20,6 +20,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+      passcode: '',
     };
   }
 
@@ -29,11 +30,11 @@ class Login extends React.Component {
 
   handleSubmit = (event, type) => {
     event.preventDefault();
-    this.login(this.state.username, this.state.password, type);
-    this.setState({ username: '', password: '' });
+    this.login(this.state.username, this.state.password, this.state.passcode, type);
+    this.setState({ username: '', password: '', passcode: '' });
   };
 
-  login = (username, password, type) => {
+  login = (username, password, passcode, type) => {
     const options = {
       method: 'POST',
       mode: 'cors',
@@ -43,17 +44,29 @@ class Login extends React.Component {
       }),
     };
 
+    let role = '';
+
+    if (passcode === 'elephant') {
+      role = 'editor';
+    } else if (passcode === 'anteater') {
+      role = 'admin';
+    } else {
+      role = 'user';
+    }
+
     if (type === 'signup') {
-      options.body = JSON.stringify({ username, password });
+      options.body = JSON.stringify({ username, password, role });
       options.headers = new Headers({
         'Content-Type': 'application/json',
       });
     }
 
+    console.log('OPTIONS', options);
+
     fetch(`${API}/${type}`, options)
       .then((response) => response.text())
       .then((token) => this.validateToken(token))
-      .catch(console.error);
+      .catch(this.props.setUserState(false, null, {}));
   };
 
   validateToken = (token) => {
@@ -83,20 +96,51 @@ class Login extends React.Component {
 
         <If condition={!this.props.users.loggedIn}>
           <form>
-            <input
-              type="text"
-              name='username'
-              placeholder='Username'
-              onChange={this.handleChange}
-            />
-            <input
-              type="text"
-              name='password'
-              placeholder='Password'
-              onChange={this.handleChange}
-            />
-            <button onClick={(event) => this.handleSubmit(event, 'signin')}>Sign In</button>
+            <label>Username
+              <input
+                type="text"
+                name='username'
+                placeholder='Username'
+                onChange={this.handleChange}
+              />
+            </label>
+            <label>Password
+              <input
+                type="text"
+                name='password'
+                placeholder='Password'
+                onChange={this.handleChange}
+              />
+            </label>
+            <label> Passcode
+              <input
+                type="text"
+                name='passcode'
+                placeholder='Passcode here'
+                onChange={this.handleChange}
+              />
+            </label>
             <button onClick={(event) => this.handleSubmit(event, 'signup')}>Sign Up</button>
+          </form>
+
+          <form>
+            <label>Username
+              <input
+                type="text"
+                name='username'
+                placeholder='Username'
+                onChange={this.handleChange}
+              />
+            </label>
+            <label>Password
+              <input
+                type="text"
+                name='password'
+                placeholder='Password'
+                onChange={this.handleChange}
+              />
+            </label>
+            <button onClick={(event) => this.handleSubmit(event, 'signin')}>Sign In</button>
           </form>
         </If>
       </>

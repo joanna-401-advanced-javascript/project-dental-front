@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 // Components
 // import Detail from '../Detail/Detail';
 import Checkbox from '../Checkbox/Checkbox';
+import Auth from '../Auth/auth';
 
 // Actions
 import materialActions from '../../store/actions/material-actions';
@@ -45,17 +46,19 @@ class Material extends React.Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            name='material'
-            type='text'
-            value={this.state.name}
-            onChange={this.handleChange}
-            placeholder='Material name...'
-          />
-          <button type='submit'>Add New Material </button>
-        </form>
-        <hr />
+        <Auth capability='read'>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              name='material'
+              type='text'
+              value={this.state.name}
+              onChange={this.handleChange}
+              placeholder='Material name...'
+            />
+            <button type='submit'>Add New Material </button>
+          </form>
+          <hr />
+        </Auth>
 
         <h3>Materials</h3>
         {this.props.materials.map((material, i) => <div key={i}>
@@ -63,8 +66,11 @@ class Material extends React.Component {
             {/* <p>ID: {material._id}</p> */}
             <Checkbox id={material._id} name={material.name}/>
              {/* <Detail material={material}/> */}
+          <Auth capability='read'>
             <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
             <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
+          </Auth>
+
           </div>)
         }
       </>

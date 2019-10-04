@@ -78,7 +78,6 @@ class Detail extends React.Component {
           />
           <button type='submit'>Add New Details</button>
         </form>
-        <hr/>
 
         <h4>Details for {this.props.material.name}</h4>
         {
@@ -98,7 +97,7 @@ class Detail extends React.Component {
           ))
         }
 
-
+        <hr/>
       </>
     );
   }

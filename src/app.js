@@ -8,6 +8,9 @@ import Material from './components/Material/Material';
 import Display from './components/Display/Display';
 // import Detail from './components/Detail/Detail';
 
+// Stylesheets
+// require('./stylesheets/reset.css');
+
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +32,10 @@ class App extends React.Component {
         </Auth>
         <hr />
 
-        <Display />
+        <Auth capability='read'>
+          <Display />
+        </Auth>
+
 
         {/* { */}
         {/*  this.props.selectedMaterials.forEach((material) => { */}
