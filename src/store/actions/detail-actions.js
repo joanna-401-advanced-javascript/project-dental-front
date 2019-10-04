@@ -47,6 +47,36 @@ const addDetailAction = (data) => (dispatch) => {
     .then((dataFromApi) => dispatch(post(dataFromApi)));
 };
 
+const put = (payload) => {
+  return {
+    type: 'DETAIL_UPDATE',
+    payload,
+  };
+};
+
+const updateDetailAction = (data) => (dispatch) => {
+  const cookieToken = cookie.load('auth');
+  const updateData = {
+    reference: data.reference,
+    method: data.method,
+    value: data.value,
+    materialId: data.materialId,
+  };
+  const options = {
+    method: 'PUT',
+    body: JSON.stringify(updateData),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${cookieToken}`,
+    },
+  };
+
+  return fetch(`${API}/api/v1/detail/${data._id}`, options)
+    .then((results) => results.json())
+    .then((dataFromApi) => dispatch(put(dataFromApi)));
+};
+
 const deleteThis = (payload) => {
   return {
     type: 'DETAIL_DELETE',
@@ -69,7 +99,8 @@ const deleteDetailAction = (data) => (dispatch) => {
 
 
 export default {
-  addDetailAction,
   fetchDetailsAction,
+  addDetailAction,
+  updateDetailAction,
   deleteDetailAction,
 };

@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Actions
 import detailActions from '../../store/actions/detail-actions';
-// import materialActions from "../../store/actions/material-actions";
 
 class Detail extends React.Component {
   constructor(props) {
@@ -28,6 +26,18 @@ class Detail extends React.Component {
       method: this.state.method,
       value: this.state.value,
       materialId: id,
+    });
+    this.setState({ reference: '', method: '', value: '' });
+  };
+
+  handleUpdate = (event, id, materialId) => {
+    event.preventDefault();
+    this.props.updateDetail({
+      _id: id,
+      reference: this.state.reference,
+      method: this.state.method,
+      value: this.state.value,
+      materialId,
     });
     this.setState({ reference: '', method: '', value: '' });
   };
@@ -80,7 +90,9 @@ class Detail extends React.Component {
                 <li>Method: {detail.method}</li>
                 <li>Value: {detail.value}</li>
               </ul>
-
+              <button
+                onClick={(event) => this.handleUpdate(event, detail._id, this.props.material._id)}
+              >Update</button>
               <button onClick={(event) => this.handleDelete(event, detail._id)}>Delete</button>
             </div>
           ))
@@ -101,6 +113,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addDetail: (data) => dispatch(detailActions.addDetailAction(data)),
+    updateDetail: (data) => dispatch(detailActions.updateDetailAction(data)),
     deleteDetail: (data) => dispatch(detailActions.deleteDetailAction(data)),
   };
 };
@@ -108,6 +121,7 @@ const mapDispatchToProps = (dispatch) => {
 Detail.propTypes = {
   material: PropTypes.object,
   addDetail: PropTypes.func,
+  updateDetail: PropTypes.func,
   deleteDetail: PropTypes.func,
   details: PropTypes.array,
 };
