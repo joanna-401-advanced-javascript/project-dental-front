@@ -11,10 +11,7 @@ class Display extends React.Component {
 
         {
           this.props.selectedMaterials.map((selected, i) => (
-            <>
-              <p>THIS WORKS</p>
-              <Detail material={selected} key={i}/>
-            </>
+            <Detail material={selected} key={i}/>
           ))
         }
 

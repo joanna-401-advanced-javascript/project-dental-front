@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Actions
-import { createDetailAction } from '../../store/actions/detail-actions';
+import detailActions from '../../store/actions/detail-actions';
+// import materialActions from "../../store/actions/material-actions";
 
 class Detail extends React.Component {
   constructor(props) {
@@ -14,6 +15,10 @@ class Detail extends React.Component {
       value: '',
     };
   }
+
+  componentDidMount = () => {
+    this.props.fetchDetails();
+  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,23 +37,38 @@ class Detail extends React.Component {
   };
 
   render() {
-    let detailsJSX = null;
-    if (Object.keys(this.props.details).length > 0) {
-      const { id } = this.props.material;
-      const targetDetails = this.props.details[id];
-      detailsJSX = targetDetails.map((detail, i) => (
-        <div key={i}>
-          <li>Reference: {detail.reference}</li>
-          <li>Method: {detail.method}</li>
-          <li>Value: {detail.value}</li>
-        </div>
-      ));
-    }
+    const detailsJSX = this.props.details.filter(
+      (detail) => detail.materialId === this.props.material._id,
+    );
+    // if (Object.keys(this.props.details).length > 0) {
+    //   const { id } = this.props.material;
+    //   const targetDetails = this.props.details[id];
+    //   detailsJSX = targetDetails.map((detail, i) => (
+    //     <div key={i}>
+    //       <li>Reference: {detail.reference}</li>
+    //       <li>Method: {detail.method}</li>
+    //       <li>Value: {detail.value}</li>
+    //     </div>
+    //   ));
+    // }
 
     return (
       <>
         <h4>Details for {this.props.material.name}</h4>
-        {detailsJSX}
+        {
+          detailsJSX.map((detail, i) => (
+            <div key={i}>
+              <ul>
+                <h4>Fracture toughness</h4>
+                <li>Reference: {detail.reference}</li>
+                <li>Method: {detail.method}</li>
+                <li>Value: {detail.value}</li>
+              </ul>
+            </div>
+          ))
+        }
+
+
         <form onSubmit={this.handleSubmit}>
           <input
             name='reference'
@@ -86,16 +106,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewDetail: (id, reference, method, value) => {
-      dispatch(createDetailAction(id, reference, method, value));
-    },
+    fetchDetails: () => dispatch(detailActions.fetchDetailsAction()),
+    // createNewDetail: (id, reference, method, value) => {
+    //   dispatch(detailActions.createDetailAction(id, reference, method, value));
+    // },
   };
 };
 
 Detail.propTypes = {
   material: PropTypes.object,
   createNewDetail: PropTypes.func,
-  details: PropTypes.object,
+  fetchDetails: PropTypes.func,
+  details: PropTypes.array,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Detail);
