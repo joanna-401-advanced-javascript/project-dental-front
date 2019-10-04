@@ -23,20 +23,32 @@ const fetchDetailsAction = () => (dispatch) => {
     .then((data) => dispatch(get(data)));
 };
 
-// const createDetailAction = (id, reference, method, value) => ({
-//   type: 'DETAIL_CREATE',
-//   payload: {
-//     materialId: id,
-//     id: Math.random(),
-//     reference,
-//     method,
-//     value,
-//     timeStamp: Math.floor(Date.now() / 1000),
-//   },
-// });
+const post = (payload) => {
+  return {
+    type: 'DETAIL_ADD',
+    payload,
+  };
+};
+
+const addDetailAction = (data) => (dispatch) => {
+  const cookieToken = cookie.load('auth');
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${cookieToken}`,
+    },
+  };
+
+  return fetch(`${API}/api/v1/detail`, options)
+    .then((results) => results.json())
+    .then((dataFromApi) => dispatch(post(dataFromApi)));
+};
 
 
 export default {
-  // createDetailAction,
+  addDetailAction,
   fetchDetailsAction,
 };

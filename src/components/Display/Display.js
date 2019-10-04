@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Detail from '../Detail/Detail';
-import detailActions from "../../store/actions/detail-actions";
+import detailActions from '../../store/actions/detail-actions';
 
 class Display extends React.Component {
-
   componentDidMount = () => {
     this.props.fetchDetails();
   };

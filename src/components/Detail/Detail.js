@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Actions
-// import detailActions from '../../store/actions/detail-actions';
+import detailActions from '../../store/actions/detail-actions';
 // import materialActions from "../../store/actions/material-actions";
 
 class Detail extends React.Component {
@@ -21,14 +21,14 @@ class Detail extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = (event, id) => {
     event.preventDefault();
-    this.props.createNewDetail(
-      this.props.material.id,
-      this.state.reference,
-      this.state.method,
-      this.state.value,
-    );
+    this.props.addDetail({
+      reference: this.state.reference,
+      method: this.state.method,
+      value: this.state.value,
+      materialId: id,
+    });
     this.setState({ reference: '', method: '', value: '' });
   };
 
@@ -53,8 +53,7 @@ class Detail extends React.Component {
           ))
         }
 
-
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={(event) => this.handleSubmit(event, this.props.material._id)}>
           <input
             name='reference'
             type='text'
@@ -76,7 +75,7 @@ class Detail extends React.Component {
             onChange={this.handleChange}
             placeholder='Value'
           />
-          <button type='submit'>Submit Details</button>
+          <button type='submit'>Add New Details</button>
         </form>
       </>
     );
@@ -91,15 +90,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // createNewDetail: (id, reference, method, value) => {
-    //   dispatch(detailActions.createDetailAction(id, reference, method, value));
-    // },
+    addDetail: (data) => dispatch(detailActions.addDetailAction(data)),
   };
 };
 
 Detail.propTypes = {
   material: PropTypes.object,
-  createNewDetail: PropTypes.func,
+  addDetail: PropTypes.func,
   details: PropTypes.array,
 };
 
