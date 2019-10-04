@@ -28,4 +28,12 @@ describe('Material reducer', () => {
     };
     expect(materialReducer([{ name: 'test', _id: 1 }], updateAction)).toEqual([{ name: 'update', _id: 1 }]);
   });
+
+  test('should delete a material', () => {
+    const deleteAction = {
+      type: 'MATERIAL_DELETE',
+      payload: { name: 'test', _id: 1 },
+    };
+    expect(materialReducer([{ name: 'test', _id: 1 }], deleteAction)).toEqual([]);
+  });
 });

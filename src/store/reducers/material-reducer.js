@@ -11,6 +11,8 @@ export default (state = [], action) => {
         }
         return material;
       });
+    case 'MATERIAL_DELETE':
+      return state.filter((material) => material._id !== action.payload._id);
     default:
       return state;
   }

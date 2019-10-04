@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 // import Detail from '../Detail/Detail';
+import Checkbox from '../Checkbox/Checkbox';
 
 // Actions
 import materialActions from '../../store/actions/material-actions';
@@ -36,11 +37,10 @@ class Material extends React.Component {
     this.setState({ name: '' });
   };
 
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   if(prevProps.materials !== this.props.materials){
-  //     this.props.fetchMaterials();
-  //   }
-  // }
+  handleDelete = (event, id) => {
+    event.preventDefault();
+    this.props.deleteMaterial({ _id: id });
+  };
 
   render() {
     return (
@@ -60,10 +60,11 @@ class Material extends React.Component {
         <h3>Materials</h3>
         {this.props.materials.map((material, i) => <div key={i}>
             <p>Name: {material.name}</p>
-            <p>ID: {material._id}</p>
-            {/* <Detail material={material}/> */}
+            {/* <p>ID: {material._id}</p> */}
+            <Checkbox id={material._id} name={material.name}/>
+             {/* <Detail material={material}/> */}
             <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
-            <button>Delete</button>
+            <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
           </div>)
         }
       </>
@@ -82,6 +83,7 @@ const mapDispatchToProps = (dispatch) => {
     addMaterial: (name) => dispatch(materialActions.addMaterialAction(name)),
     fetchMaterials: () => dispatch(materialActions.fetchMaterialsAction()),
     updateMaterial: (data) => dispatch(materialActions.updateMaterialAction(data)),
+    deleteMaterial: (data) => dispatch(materialActions.deleteMaterialAction(data)),
   };
 };
 
@@ -90,6 +92,7 @@ Material.propTypes = {
   addMaterial: PropTypes.func,
   fetchMaterials: PropTypes.func,
   updateMaterial: PropTypes.func,
+  deleteMaterial: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Material);

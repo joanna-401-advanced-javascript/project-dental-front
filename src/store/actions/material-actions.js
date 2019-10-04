@@ -72,8 +72,29 @@ const updateMaterialAction = (data) => (dispatch) => {
     .then((dataFromApi) => dispatch(put(dataFromApi)));
 };
 
+const deleteThis = (payload) => {
+  return {
+    type: 'MATERIAL_DELETE',
+    payload,
+  };
+};
+
+const deleteMaterialAction = (data) => (dispatch) => {
+  const cookieToken = cookie.load('auth');
+  const options = {
+    method: 'DELETE',
+    headers: new Headers({
+      Authorization: `Bearer ${cookieToken}`,
+    }),
+  };
+
+  return fetch(`${API}/api/v1/material/${data._id}`, options)
+    .then(() => dispatch(deleteThis(data)));
+};
+
 export default {
   fetchMaterialsAction,
   addMaterialAction,
   updateMaterialAction,
+  deleteMaterialAction,
 };
