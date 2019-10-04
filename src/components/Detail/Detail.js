@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Actions
-import detailActions from '../../store/actions/detail-actions';
+// import detailActions from '../../store/actions/detail-actions';
 // import materialActions from "../../store/actions/material-actions";
 
 class Detail extends React.Component {
@@ -15,10 +15,6 @@ class Detail extends React.Component {
       value: '',
     };
   }
-
-  componentDidMount = () => {
-    this.props.fetchDetails();
-  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,17 +36,6 @@ class Detail extends React.Component {
     const detailsJSX = this.props.details.filter(
       (detail) => detail.materialId === this.props.material._id,
     );
-    // if (Object.keys(this.props.details).length > 0) {
-    //   const { id } = this.props.material;
-    //   const targetDetails = this.props.details[id];
-    //   detailsJSX = targetDetails.map((detail, i) => (
-    //     <div key={i}>
-    //       <li>Reference: {detail.reference}</li>
-    //       <li>Method: {detail.method}</li>
-    //       <li>Value: {detail.value}</li>
-    //     </div>
-    //   ));
-    // }
 
     return (
       <>
@@ -106,7 +91,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchDetails: () => dispatch(detailActions.fetchDetailsAction()),
     // createNewDetail: (id, reference, method, value) => {
     //   dispatch(detailActions.createDetailAction(id, reference, method, value));
     // },
@@ -116,7 +100,6 @@ const mapDispatchToProps = (dispatch) => {
 Detail.propTypes = {
   material: PropTypes.object,
   createNewDetail: PropTypes.func,
-  fetchDetails: PropTypes.func,
   details: PropTypes.array,
 };
 

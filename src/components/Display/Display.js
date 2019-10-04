@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Detail from '../Detail/Detail';
+import detailActions from "../../store/actions/detail-actions";
 
 class Display extends React.Component {
+
+  componentDidMount = () => {
+    this.props.fetchDetails();
+  };
+
   render() {
     return (
       <>
@@ -25,8 +31,16 @@ const mapStateToProps = (state) => ({
   details: state.details,
 });
 
-Display.propTypes = {
-  selectedMaterials: PropTypes.array,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchDetails: () => dispatch(detailActions.fetchDetailsAction()),
+  };
 };
 
-export default connect(mapStateToProps, null)(Display);
+Display.propTypes = {
+  selectedMaterials: PropTypes.array,
+  fetchDetails: PropTypes.func,
+  details: PropTypes.array,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Display);
