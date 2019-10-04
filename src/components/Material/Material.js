@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 // import Detail from '../Detail/Detail';
+import Checkbox from '../Checkbox/Checkbox';
 
 // Actions
 import materialActions from '../../store/actions/material-actions';
@@ -60,7 +61,8 @@ class Material extends React.Component {
         {this.props.materials.map((material, i) => <div key={i}>
             <p>Name: {material.name}</p>
             <p>ID: {material._id}</p>
-            {/* <Detail material={material}/> */}
+            <Checkbox id={material._id} />
+             {/* <Detail material={material}/> */}
             <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
             <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
           </div>)
