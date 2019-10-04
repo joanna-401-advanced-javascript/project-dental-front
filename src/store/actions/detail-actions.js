@@ -47,8 +47,29 @@ const addDetailAction = (data) => (dispatch) => {
     .then((dataFromApi) => dispatch(post(dataFromApi)));
 };
 
+const deleteThis = (payload) => {
+  return {
+    type: 'DETAIL_DELETE',
+    payload,
+  };
+};
+
+const deleteDetailAction = (data) => (dispatch) => {
+  const cookieToken = cookie.load('auth');
+  const options = {
+    method: 'DELETE',
+    headers: new Headers({
+      Authorization: `Bearer ${cookieToken}`,
+    }),
+  };
+
+  return fetch(`${API}/api/v1/detail/${data._id}`, options)
+    .then(() => dispatch(deleteThis(data)));
+};
+
 
 export default {
   addDetailAction,
   fetchDetailsAction,
+  deleteDetailAction,
 };

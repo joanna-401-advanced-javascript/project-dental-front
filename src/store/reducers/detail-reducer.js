@@ -6,6 +6,8 @@ export default (state = [], action) => {
       return action.payload;
     case 'DETAIL_ADD':
       return [...state, action.payload];
+    case 'DETAIL_DELETE':
+      return state.filter((detail) => detail._id !== action.payload._id);
     default:
       return state;
   }

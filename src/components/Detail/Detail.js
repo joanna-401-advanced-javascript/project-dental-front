@@ -32,6 +32,11 @@ class Detail extends React.Component {
     this.setState({ reference: '', method: '', value: '' });
   };
 
+  handleDelete = (event, id) => {
+    event.preventDefault();
+    this.props.deleteDetail({ _id: id });
+  };
+
   render() {
     const detailsJSX = this.props.details.filter(
       (detail) => detail.materialId === this.props.material._id,
@@ -39,20 +44,6 @@ class Detail extends React.Component {
 
     return (
       <>
-        <h4>Details for {this.props.material.name}</h4>
-        {
-          detailsJSX.map((detail, i) => (
-            <div key={i}>
-              <ul>
-                <h4>Fracture toughness</h4>
-                <li>Reference: {detail.reference}</li>
-                <li>Method: {detail.method}</li>
-                <li>Value: {detail.value}</li>
-              </ul>
-            </div>
-          ))
-        }
-
         <form onSubmit={(event) => this.handleSubmit(event, this.props.material._id)}>
           <input
             name='reference'
@@ -77,6 +68,25 @@ class Detail extends React.Component {
           />
           <button type='submit'>Add New Details</button>
         </form>
+        <hr/>
+
+        <h4>Details for {this.props.material.name}</h4>
+        {
+          detailsJSX.map((detail, i) => (
+            <div key={i}>
+              <ul>
+                <h4>Fracture toughness</h4>
+                <li>Reference: {detail.reference}</li>
+                <li>Method: {detail.method}</li>
+                <li>Value: {detail.value}</li>
+              </ul>
+
+              <button onClick={(event) => this.handleDelete(event, detail._id)}>Delete</button>
+            </div>
+          ))
+        }
+
+
       </>
     );
   }
@@ -91,12 +101,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addDetail: (data) => dispatch(detailActions.addDetailAction(data)),
+    deleteDetail: (data) => dispatch(detailActions.deleteDetailAction(data)),
   };
 };
 
 Detail.propTypes = {
   material: PropTypes.object,
   addDetail: PropTypes.func,
+  deleteDetail: PropTypes.func,
   details: PropTypes.array,
 };
 
