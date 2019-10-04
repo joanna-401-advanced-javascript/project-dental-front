@@ -12,12 +12,13 @@ class Checkbox extends React.Component {
     };
   }
 
-  handleChange = (event, id) => {
+  handleChange = (event, id, name) => {
+    const selectedObject = { name, _id: id };
     this.setState({ checked: event.target.checked });
     if (event.target.checked === true) {
-      this.props.selectMaterial(id);
+      this.props.selectMaterial(selectedObject);
     } else {
-      this.props.deselectMaterial(id);
+      this.props.deselectMaterial(selectedObject);
     }
   };
 
@@ -29,8 +30,9 @@ class Checkbox extends React.Component {
           <input
             type='checkbox'
             id={this.props.id}
+            name={this.props.name}
             checked={this.state.checked}
-            onChange={(event) => this.handleChange(event, this.props.id)}
+            onChange={(event) => this.handleChange(event, this.props.id, this.props.name)}
           />
         </label>
       </>
@@ -46,8 +48,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectMaterial: (id) => dispatch(selectedActions.selectMaterialAction(id)),
-    deselectMaterial: (id) => dispatch(selectedActions.deselectMaterialAction(id)),
+    selectMaterial: (data) => dispatch(selectedActions.selectMaterialAction(data)),
+    deselectMaterial: (data) => dispatch(selectedActions.deselectMaterialAction(data)),
   };
 };
 
@@ -55,6 +57,7 @@ Checkbox.propTypes = {
   selectMaterial: PropTypes.func,
   deselectMaterial: PropTypes.func,
   id: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkbox);

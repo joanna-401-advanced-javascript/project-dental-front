@@ -1,14 +1,14 @@
-const selectMaterialAction = (id) => {
+const selectMaterialAction = (payload) => {
   return ({
     type: 'SELECT_MATERIAL',
-    payload: id,
+    payload,
   });
 };
 
-const deselectMaterialAction = (id) => {
+const deselectMaterialAction = (payload) => {
   return ({
     type: 'DESELECT_MATERIAL',
-    payload: id,
+    payload,
   });
 };
 

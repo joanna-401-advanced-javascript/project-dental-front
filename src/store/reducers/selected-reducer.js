@@ -3,7 +3,7 @@ export default (state = [], action) => {
     case 'SELECT_MATERIAL':
       return [...state, action.payload];
     case 'DESELECT_MATERIAL':
-      return state.filter((id) => id !== action.payload);
+      return state.filter((material) => material._id !== action.payload._id);
     default:
       return state;
   }

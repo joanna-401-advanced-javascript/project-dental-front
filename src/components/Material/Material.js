@@ -61,7 +61,7 @@ class Material extends React.Component {
         {this.props.materials.map((material, i) => <div key={i}>
             <p>Name: {material.name}</p>
             <p>ID: {material._id}</p>
-            <Checkbox id={material._id} />
+            <Checkbox id={material._id} name={material.name}/>
              {/* <Detail material={material}/> */}
             <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
             <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
