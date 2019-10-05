@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import { changeStateAction, logoutAction } from '../../store/actions/user-actions';
 
 const API = process.env.REACT_APP_API;
+const editorCode = process.env.REACT_APP_EDITOR_CODE;
+const adminCode = process.env.REACT_APP_ADMIN_CODE;
 
 const If = (props) => {
   return props.condition ? props.children : null;
@@ -46,9 +48,9 @@ class Login extends React.Component {
 
     let role = '';
 
-    if (passcode === 'elephant') {
+    if (passcode === editorCode) {
       role = 'editor';
-    } else if (passcode === 'anteater') {
+    } else if (passcode === adminCode) {
       role = 'admin';
     } else {
       role = 'user';
@@ -60,8 +62,6 @@ class Login extends React.Component {
         'Content-Type': 'application/json',
       });
     }
-
-    console.log('OPTIONS', options);
 
     fetch(`${API}/${type}`, options)
       .then((response) => response.text())

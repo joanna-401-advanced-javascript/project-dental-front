@@ -46,7 +46,7 @@ class Material extends React.Component {
   render() {
     return (
       <>
-        <Auth capability='read'>
+        <Auth capability='create'>
           <form onSubmit={this.handleSubmit}>
             <input
               name='material'
@@ -63,14 +63,14 @@ class Material extends React.Component {
         <h3>Materials</h3>
         {this.props.materials.map((material, i) => <div key={i}>
             <p>Name: {material.name}</p>
-            {/* <p>ID: {material._id}</p> */}
             <Checkbox id={material._id} name={material.name}/>
-             {/* <Detail material={material}/> */}
-          <Auth capability='read'>
-            <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
-            <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
-          </Auth>
 
+            <Auth capability='update'>
+              <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
+            </Auth>
+            <Auth capability='delete'>
+              <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
+            </Auth>
           </div>)
         }
       </>

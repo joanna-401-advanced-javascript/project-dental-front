@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Auth from '../Auth/auth';
 import detailActions from '../../store/actions/detail-actions';
 
 class Detail extends React.Component {
@@ -54,30 +55,32 @@ class Detail extends React.Component {
 
     return (
       <>
-        <form onSubmit={(event) => this.handleSubmit(event, this.props.material._id)}>
-          <input
-            name='reference'
-            type='text'
-            value={this.state.reference}
-            onChange={this.handleChange}
-            placeholder='Reference'
-          />
-          <input
-            name='method'
-            type='text'
-            value={this.state.method}
-            onChange={this.handleChange}
-            placeholder='Method'
-          />
-          <input
-            name='value'
-            type='text'
-            value={this.state.value}
-            onChange={this.handleChange}
-            placeholder='Value'
-          />
-          <button type='submit'>Add New Details</button>
-        </form>
+        <Auth capability='create'>
+          <form onSubmit={(event) => this.handleSubmit(event, this.props.material._id)}>
+            <input
+              name='reference'
+              type='text'
+              value={this.state.reference}
+              onChange={this.handleChange}
+              placeholder='Reference'
+            />
+            <input
+              name='method'
+              type='text'
+              value={this.state.method}
+              onChange={this.handleChange}
+              placeholder='Method'
+            />
+            <input
+              name='value'
+              type='text'
+              value={this.state.value}
+              onChange={this.handleChange}
+              placeholder='Value'
+            />
+            <button type='submit'>Add New Details</button>
+          </form>
+        </Auth>
 
         <h4>Details for {this.props.material.name}</h4>
         {
@@ -89,10 +92,14 @@ class Detail extends React.Component {
                 <li>Method: {detail.method}</li>
                 <li>Value: {detail.value}</li>
               </ul>
-              <button
-                onClick={(event) => this.handleUpdate(event, detail._id, this.props.material._id)}
-              >Update</button>
-              <button onClick={(event) => this.handleDelete(event, detail._id)}>Delete</button>
+              <Auth capability='update'>
+                <button onClick={
+                  (event) => this.handleUpdate(event, detail._id, this.props.material._id)
+                }>Update</button>
+              </Auth>
+              <Auth capability='delete'>
+                <button onClick={(event) => this.handleDelete(event, detail._id)}>Delete</button>
+              </Auth>
             </div>
           ))
         }
