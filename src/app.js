@@ -10,13 +10,11 @@ import Auth from './components/Auth/auth';
 import Material from './components/Material/Material';
 import Display from './components/Display/Display';
 import { logoutAction } from './store/actions/user-actions';
-// import Detail from './components/Detail/Detail';
 
 const API = process.env.REACT_APP_API;
 
 // Stylesheets
 // require('./stylesheets/reset.css');
-
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +25,7 @@ class App extends React.Component {
   componentDidMount = () => {
     const currentCookie = cookie.load('auth');
 
-    if (currentCookie) {
+    if (currentCookie !== null) {
       const options = {
         method: 'POST',
         headers: new Headers({
@@ -87,4 +85,3 @@ App.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-// export default App;
