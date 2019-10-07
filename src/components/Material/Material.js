@@ -15,6 +15,7 @@ class Material extends React.Component {
     super(props);
     this.state = {
       name: '',
+      temp: '',
     };
   }
 
@@ -26,6 +27,10 @@ class Material extends React.Component {
     this.setState({ name: event.target.value });
   };
 
+  handleTempChange = (event) => {
+    this.setState({ temp: event.target.value });
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addMaterial({ name: this.state.name });
@@ -34,8 +39,8 @@ class Material extends React.Component {
 
   handleUpdate = (event, id) => {
     event.preventDefault();
-    this.props.updateMaterial({ name: this.state.name, id });
-    this.setState({ name: '' });
+    this.props.updateMaterial({ name: this.state.temp, id });
+    this.setState({ temp: '' });
   };
 
   handleDelete = (event, id) => {
@@ -47,32 +52,45 @@ class Material extends React.Component {
     return (
       <>
         <Auth capability='create'>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              name='material'
-              type='text'
-              value={this.state.name}
-              onChange={this.handleChange}
-              placeholder='Material name...'
-            />
-            <button type='submit'>Add New Material </button>
-          </form>
-          <hr />
+          <div className='material-add'>
+            <h3>Add new material</h3>
+            <form onSubmit={this.handleSubmit}>
+              <label> Material name
+                <input
+                  name='material'
+                  type='text'
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <button type='submit'>Add to database</button>
+            </form>
+          </div>
         </Auth>
 
-        <h3>Materials</h3>
-        {this.props.materials.map((material, i) => <div key={i}>
-            <p>Name: {material.name}</p>
+        <div className='material-display'>
+          <h2>Materials</h2>
+          {this.props.materials.map((material, i) => <div key={i} className='material-each'>
+            <h4>{material.name}</h4>
             <Checkbox id={material._id} name={material.name}/>
 
             <Auth capability='update'>
+              <label> Change material name
+                <input
+                  name='material'
+                  type='text'
+                  value={this.state.temp}
+                  onChange={this.handleTempChange}
+                />
+              </label>
               <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
             </Auth>
             <Auth capability='delete'>
               <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
             </Auth>
           </div>)
-        }
+          }
+        </div>
       </>
     );
   }

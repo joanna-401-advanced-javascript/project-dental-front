@@ -4,8 +4,10 @@ export default class Header extends React.Component {
   render() {
     return (
       <>
-        <h1>Dental Materials Database</h1>
-        <h2>Fracture Toughness</h2>
+        <header className='headerheader'>
+          <h1>Dental Materials Database</h1>
+          <h2>Fracture Toughness</h2>
+        </header>
       </>
     );
   }

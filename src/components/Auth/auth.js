@@ -3,9 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const If = (props) => {
-  return props.condition ? props.children : null;
-};
+import If from '../If/If';
 
 class Auth extends React.Component {
   render() {
@@ -21,9 +19,7 @@ class Auth extends React.Component {
 
     return (
       <If condition={okToRender}>
-        <div>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </If>
     );
   }

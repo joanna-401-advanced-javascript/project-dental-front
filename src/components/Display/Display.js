@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Detail from '../Detail/Detail';
+import If from '../If/If';
 import detailActions from '../../store/actions/detail-actions';
 
 class Display extends React.Component {
@@ -13,13 +14,28 @@ class Display extends React.Component {
   render() {
     return (
       <>
+        <div className='display-display'>
 
-        {
-          this.props.selectedMaterials.map((selected, i) => (
-            <Detail material={selected} key={i}/>
-          ))
-        }
-
+          <If condition={this.props.selectedMaterials.length > 0}>
+            <h2>Details</h2>
+            <table>
+              <thead>
+              <th>Material</th>
+              <th>Reference</th>
+              <th>Method</th>
+              <th>Value in MPa</th>
+              <th>Update / Delete</th>
+              </thead>
+              <tbody>
+              {
+                this.props.selectedMaterials.map((selected, i) => (
+                  <Detail material={selected} key={i}/>
+                ))
+              }
+              </tbody>
+            </table>
+          </If>
+        </div>
       </>
     );
   }

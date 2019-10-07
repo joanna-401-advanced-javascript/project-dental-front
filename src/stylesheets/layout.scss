@@ -1,0 +1,63 @@
+@import "variables";
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Roboto+Mono&display=swap');
+
+
+// Forms
+form {
+  margin-bottom: 15px;
+}
+
+input, label {
+  display: block;
+}
+
+input {
+  margin-bottom: 15px;
+}
+
+// Header
+header {
+  //width: 360px;
+  display: inline-block;
+  margin-bottom: 60px;
+}
+
+// Login
+.login {
+  display: inline-block;
+  float: right;
+}
+
+// Material
+.material-add {
+  display: block;
+  float: right;
+  width: 170px;
+}
+
+.material-display {
+  display: block;
+  float: left;
+  width: 230px;
+}
+
+.material-each {
+  display: block;
+  margin: 15px 0;
+}
+
+.display-display {
+  display: block;
+  //padding: 0 15px;
+  width: 710px;
+  float: left;
+}
+
+.detail-add {
+  display: inline-block;
+  float: right;
+  width: 170px;
+}
+
+
+

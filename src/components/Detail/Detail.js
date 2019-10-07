@@ -55,56 +55,63 @@ class Detail extends React.Component {
 
     return (
       <>
-        <Auth capability='create'>
-          <form onSubmit={(event) => this.handleSubmit(event, this.props.material._id)}>
-            <input
-              name='reference'
-              type='text'
-              value={this.state.reference}
-              onChange={this.handleChange}
-              placeholder='Reference'
-            />
-            <input
-              name='method'
-              type='text'
-              value={this.state.method}
-              onChange={this.handleChange}
-              placeholder='Method'
-            />
-            <input
-              name='value'
-              type='text'
-              value={this.state.value}
-              onChange={this.handleChange}
-              placeholder='Value'
-            />
-            <button type='submit'>Add New Details</button>
-          </form>
-        </Auth>
+        {/* <div className='detail-add'> */}
+        {/*  <Auth capability='create'> */}
+        {/*    <h3>Add new detail for {this.props.material.name}</h3> */}
+        {/*    <form onSubmit={(event) => this.handleSubmit(event, this.props.material._id)}> */}
+        {/*      <label> Reference */}
+        {/*        <input */}
+        {/*          name='reference' */}
+        {/*          type='text' */}
+        {/*          value={this.state.reference} */}
+        {/*          onChange={this.handleChange} */}
+        {/*        /> */}
+        {/*      </label> */}
 
-        <h4>Details for {this.props.material.name}</h4>
-        {
-          detailsJSX.map((detail, i) => (
-            <div key={i}>
-              <ul>
-                <h4>Fracture toughness</h4>
-                <li>Reference: {detail.reference}</li>
-                <li>Method: {detail.method}</li>
-                <li>Value: {detail.value}</li>
-              </ul>
-              <Auth capability='update'>
-                <button onClick={
-                  (event) => this.handleUpdate(event, detail._id, this.props.material._id)
-                }>Update</button>
-              </Auth>
-              <Auth capability='delete'>
-                <button onClick={(event) => this.handleDelete(event, detail._id)}>Delete</button>
-              </Auth>
-            </div>
-          ))
-        }
+        {/*      <label> Method */}
+        {/*        <input */}
+        {/*          name='method' */}
+        {/*          type='text' */}
+        {/*          value={this.state.method} */}
+        {/*          onChange={this.handleChange} */}
+        {/*        /> */}
+        {/*      </label> */}
+        {/*      <label> Value */}
+        {/*        <input */}
+        {/*          name='value' */}
+        {/*          type='text' */}
+        {/*          value={this.state.value} */}
+        {/*          onChange={this.handleChange} */}
+        {/*        /> */}
+        {/*      </label> */}
+        {/*      <button type='submit'>Add New Details</button> */}
+        {/*    </form> */}
+        {/*  </Auth> */}
+        {/* </div> */}
 
-        <hr/>
+          {
+            detailsJSX.map((detail, i) => (
+              <tr key={i}>
+                <th>{this.props.material.name}</th>
+                <td>{detail.reference}</td>
+                <td>{detail.method}</td>
+                <td>{detail.value}</td>
+                <td>
+                  <Auth capability='update'>
+                    <button onClick={
+                      (event) => this.handleUpdate(event, detail._id, this.props.material._id)
+                    }>Update</button>
+                  </Auth>
+                  <Auth capability='delete'>
+                    <button onClick={
+                      (event) => this.handleDelete(event, detail._id)
+                    }>Delete</button>
+                  </Auth>
+                </td>
+              </tr>
+            ))
+          }
+
       </>
     );
   }

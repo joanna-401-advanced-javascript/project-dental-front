@@ -14,7 +14,11 @@ import { logoutAction } from './store/actions/user-actions';
 const API = process.env.REACT_APP_API;
 
 // Stylesheets
-// require('./stylesheets/reset.css');
+require('./stylesheets/reset.css');
+require('./stylesheets/base.scss');
+require('./stylesheets/layout.scss');
+require('./stylesheets/table.scss');
+require('./stylesheets/modules.scss');
 
 class App extends React.Component {
   constructor(props) {
@@ -47,19 +51,18 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <hr/>
 
         <Login />
-        <hr />
 
-        <Auth capability='read'>
-          <Material />
-        </Auth>
-        <hr />
+        <div className='main-display'>
+          <Auth capability='read'>
+            <Material />
+          </Auth>
 
-        <Auth capability='read'>
-          <Display />
-        </Auth>
+          <Auth capability='read'>
+            <Display />
+          </Auth>
+        </div>
 
       </>
     );
