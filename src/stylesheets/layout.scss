@@ -1,0 +1,119 @@
+@import "variables";
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Roboto+Mono&display=swap');
+
+.container {
+  display: grid;
+  grid-template-columns: 30px 70px 30px 70px 30px 10px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 40px 30px 70px 30px 90px;
+  grid-template-rows: 30px 130px 30px 130px 30px 130px auto 30px 130px 30px;
+}
+
+.header {
+  grid-column-start: 2;
+  grid-column-end: 15;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.login {
+  grid-column-start: -3;
+  grid-column-end: -4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.material-display {
+  grid-column-start: 2;
+  grid-column-end: 6;
+  grid-row-start: 4;
+  grid-row-end: 8;
+}
+
+.display-display {
+  grid-column-start: 7;
+  grid-column-end: 21;
+  grid-row-start: 4;
+  grid-row-end: 10;
+}
+
+.material-add {
+  grid-column-start: 22;
+  grid-column-end: 25;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+.detail-add {
+  grid-column-start: 22;
+  grid-column-end: 25;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+
+.footer {
+  grid-column-start: 2;
+  grid-column-end: 15;
+  grid-row-start: -2;
+  grid-row-end: -1;
+}
+
+
+
+//// Forms
+//form {
+//  margin-bottom: 15px;
+//}
+//
+//input, label {
+//  display: block;
+//}
+//
+//input {
+//  margin-bottom: 15px;
+//}
+//
+//// Header
+//header {
+//  //width: 360px;
+//  display: inline-block;
+//  margin-bottom: 60px;
+//}
+//
+//// Login
+//.login {
+//  display: inline-block;
+//  float: right;
+//}
+//
+//// Material
+//.material-add {
+//  display: block;
+//  float: right;
+//  width: 170px;
+//}
+//
+//.material-display {
+//  display: block;
+//  float: left;
+//  width: 230px;
+//}
+//
+//.material-each {
+//  display: block;
+//  margin: 15px 0;
+//}
+//
+//.display-display {
+//  display: block;
+//  //padding: 0 15px;
+//  width: 710px;
+//  float: left;
+//}
+//
+//.detail-add {
+//  display: inline-block;
+//  float: right;
+//  width: 170px;
+//}
+
+
+

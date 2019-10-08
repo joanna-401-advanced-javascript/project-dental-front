@@ -8,13 +8,21 @@ import Header from './components/Header/Header.jsx';
 import Login from './components/Auth/login';
 import Auth from './components/Auth/auth';
 import Material from './components/Material/Material';
+import MaterialForm from './components/Material/Material-form';
 import Display from './components/Display/Display';
+import DetailForm from './components/Detail/Detail-form';
+import Footer from './components/Footer/Footer.jsx';
+
 import { logoutAction } from './store/actions/user-actions';
 
 const API = process.env.REACT_APP_API;
 
 // Stylesheets
-// require('./stylesheets/reset.css');
+require('./stylesheets/reset.css');
+require('./stylesheets/base.scss');
+require('./stylesheets/layout.scss');
+require('./stylesheets/table.scss');
+require('./stylesheets/modules.scss');
 
 class App extends React.Component {
   constructor(props) {
@@ -46,20 +54,26 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Header />
-        <hr/>
+        <div className='container'>
+          <Header />
 
-        <Login />
-        <hr />
+          <Login />
 
-        <Auth capability='read'>
-          <Material />
-        </Auth>
-        <hr />
+          <Auth capability='read'>
+            <Material />
+          </Auth>
 
-        <Auth capability='read'>
-          <Display />
-        </Auth>
+          <Auth capability='create'>
+            <MaterialForm />
+            <DetailForm />
+          </Auth>
+
+          <Auth capability='read'>
+            <Display />
+          </Auth>
+
+          <Footer/>
+        </div>
 
       </>
     );

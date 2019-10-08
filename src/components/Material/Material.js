@@ -1,11 +1,12 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Components
-// import Detail from '../Detail/Detail';
 import Checkbox from '../Checkbox/Checkbox';
 import Auth from '../Auth/auth';
+import If from '../If/If';
 
 // Actions
 import materialActions from '../../store/actions/material-actions';
@@ -15,6 +16,7 @@ class Material extends React.Component {
     super(props);
     this.state = {
       name: '',
+      temp: '',
     };
   }
 
@@ -22,20 +24,14 @@ class Material extends React.Component {
     this.props.fetchMaterials();
   };
 
-  handleChange = (event) => {
-    this.setState({ name: event.target.value });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.addMaterial({ name: this.state.name });
-    this.setState({ name: '' });
+  handleTempChange = (event) => {
+    this.setState({ temp: event.target.value });
   };
 
   handleUpdate = (event, id) => {
     event.preventDefault();
-    this.props.updateMaterial({ name: this.state.name, id });
-    this.setState({ name: '' });
+    this.props.updateMaterial({ name: this.state.temp, id });
+    this.setState({ temp: '' });
   };
 
   handleDelete = (event, id) => {
@@ -46,33 +42,33 @@ class Material extends React.Component {
   render() {
     return (
       <>
-        <Auth capability='create'>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              name='material'
-              type='text'
-              value={this.state.name}
-              onChange={this.handleChange}
-              placeholder='Material name...'
-            />
-            <button type='submit'>Add New Material </button>
-          </form>
-          <hr />
-        </Auth>
-
-        <h3>Materials</h3>
-        {this.props.materials.map((material, i) => <div key={i}>
-            <p>Name: {material.name}</p>
+        <div className='material-display'>
+          <h2>Materials</h2>
+          {this.props.materials.map((material, i) => <div key={i} className='material-each'>
             <Checkbox id={material._id} name={material.name}/>
+            <h4>{material.name}</h4>
 
-            <Auth capability='update'>
-              <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
-            </Auth>
-            <Auth capability='delete'>
-              <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
-            </Auth>
+            <If condition={this.props.selectedMaterials.find((element) => element.name === material.name)}>
+              <Auth capability='update'>
+                <label> Change name
+                  <input
+                    name='material'
+                    type='text'
+                    value={this.state.temp}
+                    onChange={this.handleTempChange}
+                  />
+                </label>
+                <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
+              </Auth>
+              <Auth capability='delete'>
+                <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
+              </Auth>
+
+            </If>
+
           </div>)
-        }
+          }
+        </div>
       </>
     );
   }
@@ -81,12 +77,12 @@ class Material extends React.Component {
 const mapStateToProps = (state) => {
   return {
     materials: state.materials,
+    selectedMaterials: state.selectedMaterials,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMaterial: (name) => dispatch(materialActions.addMaterialAction(name)),
     fetchMaterials: () => dispatch(materialActions.fetchMaterialsAction()),
     updateMaterial: (data) => dispatch(materialActions.updateMaterialAction(data)),
     deleteMaterial: (data) => dispatch(materialActions.deleteMaterialAction(data)),
@@ -95,7 +91,7 @@ const mapDispatchToProps = (dispatch) => {
 
 Material.propTypes = {
   materials: PropTypes.array,
-  addMaterial: PropTypes.func,
+  selectedMaterials: PropTypes.array,
   fetchMaterials: PropTypes.func,
   updateMaterial: PropTypes.func,
   deleteMaterial: PropTypes.func,

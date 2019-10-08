@@ -1,0 +1,65 @@
+@import "variables";
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Roboto+Mono&display=swap');
+
+table {
+  width: 700px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  //horiz-align: left;
+  text-align: left;
+  font-size: smaller;
+
+  thead {
+    th {
+      font-family: Roboto Mono, sans-serif;
+      color: $color3;
+      text-align: left;
+      //height: 2em;
+    }
+  }
+
+  tbody {
+    th {
+      font-family: Roboto Mono, sans-serif;
+      color: $color2;
+    }
+
+    td {
+      font-family: IBM Plex Sans, sans-serif;
+    }
+
+  }
+}
+
+th, td {
+  padding: 0.25rem;
+}
+
+.column-material {
+  width: 200px;
+}
+
+.column-reference {
+  width: 90px;
+}
+
+.column-method {
+  width: 140px;
+}
+
+.column-value {
+  width: 120px;
+}
+
+.column-update {
+  width: 75px;
+}
+
+.column-delete {
+  width: 75px;
+}
+
+
+
+
+

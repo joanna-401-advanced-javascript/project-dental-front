@@ -4,10 +4,9 @@ export default class Header extends React.Component {
   render() {
     return (
       <>
-        <header className='header'>
-          <h1>Dental Materials Database</h1>
-          <h2>Fracture Toughness</h2>
-        </header>
+        <footer className='footer'>
+          <p>© Joanna Arroyo - 2019</p>
+        </footer>
       </>
     );
   }

@@ -6,15 +6,12 @@ import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
 import PropTypes from 'prop-types';
 
+import If from '../If/If';
 import { changeStateAction, logoutAction } from '../../store/actions/user-actions';
 
 const API = process.env.REACT_APP_API;
 const editorCode = process.env.REACT_APP_EDITOR_CODE;
 const adminCode = process.env.REACT_APP_ADMIN_CODE;
-
-const If = (props) => {
-  return props.condition ? props.children : null;
-};
 
 class Login extends React.Component {
   constructor(props) {
@@ -90,59 +87,56 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <If condition={this.props.users.loggedIn}>
-          <button onClick={this.logout}>Log Out</button>
-        </If>
+        <div className='login'>
+          <If condition={this.props.users.loggedIn}>
+            <button onClick={this.logout}>Log Out</button>
+          </If>
 
-        <If condition={!this.props.users.loggedIn}>
-          <form>
-            <label>Username
-              <input
-                type="text"
-                name='username'
-                placeholder='Username'
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>Password
-              <input
-                type="text"
-                name='password'
-                placeholder='Password'
-                onChange={this.handleChange}
-              />
-            </label>
-            <label> Passcode
-              <input
-                type="text"
-                name='passcode'
-                placeholder='Passcode here'
-                onChange={this.handleChange}
-              />
-            </label>
-            <button onClick={(event) => this.handleSubmit(event, 'signup')}>Sign Up</button>
-          </form>
+          <If condition={!this.props.users.loggedIn}>
+            <form className='signup'>
+              <label>Username
+                <input
+                  type="text"
+                  name='username'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>Password
+                <input
+                  type="text"
+                  name='password'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label> Passcode
+                <input
+                  type="text"
+                  name='passcode'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <button onClick={(event) => this.handleSubmit(event, 'signup')}>Sign Up</button>
+            </form>
 
-          <form>
-            <label>Username
-              <input
-                type="text"
-                name='username'
-                placeholder='Username'
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>Password
-              <input
-                type="text"
-                name='password'
-                placeholder='Password'
-                onChange={this.handleChange}
-              />
-            </label>
-            <button onClick={(event) => this.handleSubmit(event, 'signin')}>Sign In</button>
-          </form>
-        </If>
+            <form className='signin'>
+              <label>Username
+                <input
+                  type="text"
+                  name='username'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>Password
+                <input
+                  type="text"
+                  name='password'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <button onClick={(event) => this.handleSubmit(event, 'signin')}>Sign In</button>
+            </form>
+          </If>
+        </div>
       </>
     );
   }
