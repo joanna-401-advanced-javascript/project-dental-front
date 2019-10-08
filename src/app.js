@@ -8,7 +8,11 @@ import Header from './components/Header/Header.jsx';
 import Login from './components/Auth/login';
 import Auth from './components/Auth/auth';
 import Material from './components/Material/Material';
+import MaterialForm from './components/Material/Material-form';
 import Display from './components/Display/Display';
+import DetailForm from './components/Detail/Detail-form';
+import Footer from './components/Footer/Footer.jsx';
+
 import { logoutAction } from './store/actions/user-actions';
 
 const API = process.env.REACT_APP_API;
@@ -50,18 +54,25 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Header />
+        <div className='container'>
+          <Header />
 
-        <Login />
+          <Login />
 
-        <div className='main-display'>
           <Auth capability='read'>
             <Material />
+          </Auth>
+
+          <Auth capability='create'>
+            <MaterialForm />
+            <DetailForm />
           </Auth>
 
           <Auth capability='read'>
             <Display />
           </Auth>
+
+          <Footer/>
         </div>
 
       </>

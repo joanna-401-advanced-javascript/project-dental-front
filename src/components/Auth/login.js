@@ -93,7 +93,7 @@ class Login extends React.Component {
           </If>
 
           <If condition={!this.props.users.loggedIn}>
-            <form>
+            <form className='signup'>
               <label>Username
                 <input
                   type="text"
@@ -118,7 +118,7 @@ class Login extends React.Component {
               <button onClick={(event) => this.handleSubmit(event, 'signup')}>Sign Up</button>
             </form>
 
-            <form>
+            <form className='signin'>
               <label>Username
                 <input
                   type="text"

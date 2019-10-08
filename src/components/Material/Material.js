@@ -23,18 +23,8 @@ class Material extends React.Component {
     this.props.fetchMaterials();
   };
 
-  handleChange = (event) => {
-    this.setState({ name: event.target.value });
-  };
-
   handleTempChange = (event) => {
     this.setState({ temp: event.target.value });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.addMaterial({ name: this.state.name });
-    this.setState({ name: '' });
   };
 
   handleUpdate = (event, id) => {
@@ -51,28 +41,11 @@ class Material extends React.Component {
   render() {
     return (
       <>
-        <Auth capability='create'>
-          <div className='material-add'>
-            <h3>Add new material</h3>
-            <form onSubmit={this.handleSubmit}>
-              <label> Material name
-                <input
-                  name='material'
-                  type='text'
-                  value={this.state.name}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <button type='submit'>Add to database</button>
-            </form>
-          </div>
-        </Auth>
-
         <div className='material-display'>
           <h2>Materials</h2>
           {this.props.materials.map((material, i) => <div key={i} className='material-each'>
-            <h4>{material.name}</h4>
             <Checkbox id={material._id} name={material.name}/>
+            <h4>{material.name}</h4>
 
             <Auth capability='update'>
               <label> Change material name
@@ -104,7 +77,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMaterial: (name) => dispatch(materialActions.addMaterialAction(name)),
     fetchMaterials: () => dispatch(materialActions.fetchMaterialsAction()),
     updateMaterial: (data) => dispatch(materialActions.updateMaterialAction(data)),
     deleteMaterial: (data) => dispatch(materialActions.deleteMaterialAction(data)),
@@ -113,7 +85,6 @@ const mapDispatchToProps = (dispatch) => {
 
 Material.propTypes = {
   materials: PropTypes.array,
-  addMaterial: PropTypes.func,
   fetchMaterials: PropTypes.func,
   updateMaterial: PropTypes.func,
   deleteMaterial: PropTypes.func,

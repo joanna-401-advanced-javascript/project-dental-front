@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Detail from '../Detail/Detail';
 import If from '../If/If';
 import detailActions from '../../store/actions/detail-actions';
+import Auth from '../Auth/auth';
 
 class Display extends React.Component {
   componentDidMount = () => {
@@ -24,7 +25,13 @@ class Display extends React.Component {
               <th>Reference</th>
               <th>Method</th>
               <th>Value in MPa</th>
-              <th>Update / Delete</th>
+              <Auth capability='update'>
+                <th>Update</th>
+              </Auth>
+              <Auth capability='delete'>
+                <th>Delete</th>
+              </Auth>
+
               </thead>
               <tbody>
               {

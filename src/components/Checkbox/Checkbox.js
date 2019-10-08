@@ -25,16 +25,17 @@ class Checkbox extends React.Component {
   render() {
     return (
       <>
-        <label>
-          Compare:
+        {/* <label> */}
+          {/* Compare: */}
           <input
+            className='checkbox'
             type='checkbox'
             id={this.props.id}
             name={this.props.name}
             checked={this.state.checked}
             onChange={(event) => this.handleChange(event, this.props.id, this.props.name)}
           />
-        </label>
+        {/* </label> */}
       </>
     );
   }

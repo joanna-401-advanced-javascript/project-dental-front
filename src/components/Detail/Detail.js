@@ -20,17 +20,6 @@ class Detail extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (event, id) => {
-    event.preventDefault();
-    this.props.addDetail({
-      reference: this.state.reference,
-      method: this.state.method,
-      value: this.state.value,
-      materialId: id,
-    });
-    this.setState({ reference: '', method: '', value: '' });
-  };
-
   handleUpdate = (event, id, materialId) => {
     event.preventDefault();
     this.props.updateDetail({
@@ -55,40 +44,6 @@ class Detail extends React.Component {
 
     return (
       <>
-        {/* <div className='detail-add'> */}
-        {/*  <Auth capability='create'> */}
-        {/*    <h3>Add new detail for {this.props.material.name}</h3> */}
-        {/*    <form onSubmit={(event) => this.handleSubmit(event, this.props.material._id)}> */}
-        {/*      <label> Reference */}
-        {/*        <input */}
-        {/*          name='reference' */}
-        {/*          type='text' */}
-        {/*          value={this.state.reference} */}
-        {/*          onChange={this.handleChange} */}
-        {/*        /> */}
-        {/*      </label> */}
-
-        {/*      <label> Method */}
-        {/*        <input */}
-        {/*          name='method' */}
-        {/*          type='text' */}
-        {/*          value={this.state.method} */}
-        {/*          onChange={this.handleChange} */}
-        {/*        /> */}
-        {/*      </label> */}
-        {/*      <label> Value */}
-        {/*        <input */}
-        {/*          name='value' */}
-        {/*          type='text' */}
-        {/*          value={this.state.value} */}
-        {/*          onChange={this.handleChange} */}
-        {/*        /> */}
-        {/*      </label> */}
-        {/*      <button type='submit'>Add New Details</button> */}
-        {/*    </form> */}
-        {/*  </Auth> */}
-        {/* </div> */}
-
           {
             detailsJSX.map((detail, i) => (
               <tr key={i}>
@@ -102,6 +57,8 @@ class Detail extends React.Component {
                       (event) => this.handleUpdate(event, detail._id, this.props.material._id)
                     }>Update</button>
                   </Auth>
+                </td>
+                <td>
                   <Auth capability='delete'>
                     <button onClick={
                       (event) => this.handleDelete(event, detail._id)
@@ -125,7 +82,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addDetail: (data) => dispatch(detailActions.addDetailAction(data)),
     updateDetail: (data) => dispatch(detailActions.updateDetailAction(data)),
     deleteDetail: (data) => dispatch(detailActions.deleteDetailAction(data)),
   };
@@ -133,7 +89,6 @@ const mapDispatchToProps = (dispatch) => {
 
 Detail.propTypes = {
   material: PropTypes.object,
-  addDetail: PropTypes.func,
   updateDetail: PropTypes.func,
   deleteDetail: PropTypes.func,
   details: PropTypes.array,
