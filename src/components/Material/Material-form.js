@@ -30,7 +30,7 @@ class MaterialForm extends React.Component {
         <div className='material-add'>
           <h3>Add new material</h3>
           <form onSubmit={this.handleSubmit}>
-            <label> Material name
+            <label> Name
               <input
                 name='material'
                 type='text'

@@ -3,8 +3,8 @@
 
 .container {
   display: grid;
-  grid-template-columns: 30px 70px 30px 70px 30px 40px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px;
-  grid-template-rows: 30px 130px 30px 130px 30px 130px auto 30px 30px 30px;
+  grid-template-columns: 30px 70px 30px 70px 30px 10px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 70px 40px 30px 70px 30px 90px;
+  grid-template-rows: 30px 130px 30px 130px 30px 130px auto 30px 130px 30px;
 }
 
 .header {
@@ -30,21 +30,21 @@
 
 .display-display {
   grid-column-start: 7;
-  grid-column-end: 24;
+  grid-column-end: 21;
   grid-row-start: 4;
   grid-row-end: 10;
 }
 
 .material-add {
-  grid-column-start: 21;
-  grid-column-end: 24;
+  grid-column-start: 22;
+  grid-column-end: 25;
   grid-row-start: 4;
   grid-row-end: 5;
 }
 
 .detail-add {
-  grid-column-start: 21;
-  grid-column-end: 24;
+  grid-column-start: 22;
+  grid-column-end: 25;
   grid-row-start: 6;
   grid-row-end: 7;
 }
@@ -52,8 +52,8 @@
 .footer {
   grid-column-start: 2;
   grid-column-end: 15;
-  grid-row-start: 9;
-  grid-row-end: 10;
+  grid-row-start: -2;
+  grid-row-end: -1;
 }
 
 

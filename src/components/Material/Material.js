@@ -1,11 +1,12 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Components
-// import Detail from '../Detail/Detail';
 import Checkbox from '../Checkbox/Checkbox';
 import Auth from '../Auth/auth';
+import If from '../If/If';
 
 // Actions
 import materialActions from '../../store/actions/material-actions';
@@ -47,20 +48,24 @@ class Material extends React.Component {
             <Checkbox id={material._id} name={material.name}/>
             <h4>{material.name}</h4>
 
-            <Auth capability='update'>
-              <label> Change material name
-                <input
-                  name='material'
-                  type='text'
-                  value={this.state.temp}
-                  onChange={this.handleTempChange}
-                />
-              </label>
-              <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
-            </Auth>
-            <Auth capability='delete'>
-              <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
-            </Auth>
+            <If condition={this.props.selectedMaterials.find((element) => element.name === material.name)}>
+              <Auth capability='update'>
+                <label> Change name
+                  <input
+                    name='material'
+                    type='text'
+                    value={this.state.temp}
+                    onChange={this.handleTempChange}
+                  />
+                </label>
+                <button onClick={(event) => this.handleUpdate(event, material._id)}>Update</button>
+              </Auth>
+              <Auth capability='delete'>
+                <button onClick={(event) => this.handleDelete(event, material._id)}>Delete</button>
+              </Auth>
+
+            </If>
+
           </div>)
           }
         </div>
@@ -72,6 +77,7 @@ class Material extends React.Component {
 const mapStateToProps = (state) => {
   return {
     materials: state.materials,
+    selectedMaterials: state.selectedMaterials,
   };
 };
 
@@ -85,6 +91,7 @@ const mapDispatchToProps = (dispatch) => {
 
 Material.propTypes = {
   materials: PropTypes.array,
+  selectedMaterials: PropTypes.array,
   fetchMaterials: PropTypes.func,
   updateMaterial: PropTypes.func,
   deleteMaterial: PropTypes.func,

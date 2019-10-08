@@ -21,15 +21,15 @@ class Display extends React.Component {
             <h2>Details</h2>
             <table>
               <thead>
-              <th>Material</th>
-              <th>Reference</th>
-              <th>Method</th>
-              <th>Value in MPa</th>
+              <th className='column-material'>Material</th>
+              <th className='column-reference'>Reference</th>
+              <th className='column-method'>Method</th>
+              <th className='column-value'>Value in MPa√m (S.D.)</th>
               <Auth capability='update'>
-                <th>Update</th>
+                <th className='column-update'>Update</th>
               </Auth>
               <Auth capability='delete'>
-                <th>Delete</th>
+                <th className='column-delete'>Delete</th>
               </Auth>
 
               </thead>
